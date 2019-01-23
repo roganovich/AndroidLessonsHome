@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">AndroidLessons</string>
     <string name="action_settings">Settings</string>
+    <string name="lblLogin">Login:</string>
+    <string name="lblPass">Password:</string>
+    <string name="hintLogin">Введите Login</string>
+    <string name="hintPass">Введите пароль</string>
+    <string name="btn">Войти</string>
+    <string name="btnClear">Очистить</string>
 </resources>

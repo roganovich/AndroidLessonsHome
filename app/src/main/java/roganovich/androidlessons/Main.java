@@ -10,17 +10,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Main extends AppCompatActivity implements View.OnClickListener{
+public class Main extends AppCompatActivity{
 
-    static  String LOGIN = "Roganovich";
-    static  String PASSWORD = "123456";
+    static  String LOGIN = "1";
+    static  String PASSWORD = "1";
 
-    Button btn;
+    Button btnLogin;
+    Button btnClear;
     EditText txtLogin;
     EditText txtPassword;
     TextView txtAuth;
+
+    ImageView imgClose;
+    ImageView imgOpen;
 
 
     @Override
@@ -33,6 +38,45 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         txtLogin = (EditText) findViewById(R.id.txtLogin);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
         txtAuth = (TextView) findViewById(R.id.txtAuth);
+
+        imgClose = (ImageView) findViewById(R.id.imgClose);
+        imgOpen = (ImageView) findViewById(R.id.imgOpen);
+        imgOpen.setVisibility(View.VISIBLE);
+        imgOpen.setVisibility(View.INVISIBLE);
+
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String login = txtLogin.getText().toString();
+                String password = txtPassword.getText().toString();
+                System.out.println(login + " == " + LOGIN);
+                System.out.println(password + " == " + PASSWORD);
+
+                if(login.equals(LOGIN) && password.equals(PASSWORD)) {// && String.valueOf(password) == String.valueOf(PASSWORD)
+                    txtAuth.setText("Успешно");
+                    imgClose.setVisibility(View.INVISIBLE);
+                    imgOpen.setVisibility(View.VISIBLE);
+                }else{
+                    txtAuth.setText("ОШИБКА");
+                    imgClose.setVisibility(View.VISIBLE);
+                    imgOpen.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        btnClear = (Button) findViewById(R.id.btnClear);
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtLogin.setText("");
+                txtPassword.setText("");
+                txtAuth.setText("");
+
+                imgClose.setVisibility(View.VISIBLE);
+                imgOpen.setVisibility(View.INVISIBLE);
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -64,22 +108,5 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        String login = txtLogin.getText().toString();
-        String password = txtPassword.getText().toString();
-
-        switch (v.getId()){
-            case R.id.btnLogin:
-                if(login == LOGIN && password == PASSWORD) {
-                    txtAuth.setText("Успешно");
-                }else{
-                    txtAuth.setText("Ошибка");
-                }
-                break;
-        }
     }
 }
